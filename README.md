@@ -6,6 +6,10 @@ go implementation for [BrowserQuest](https://github.com/mozilla/BrowserQuest) se
 Installation
 -------------
 
+```
+go get 
+```
+
 Configuration
 -------------
 

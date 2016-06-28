@@ -1,8 +1,8 @@
 package bqs
 
 type EntityType struct {
-	Id int
-	Name string
+	Id    int
+	Name  string
 	Class string
 }
 
@@ -67,7 +67,7 @@ var (
 	TYPE_CODER = EntityType{55, "CODER", "npc"}
 )
 
-var EntityTypeMap = map[string]EntityType {
+var EntityTypeMap = map[string]EntityType{
 	"rat": TYPE_RAT,
 	"skeleton": TYPE_SKELETON,
 	"skeleton2": TYPE_SKELETON2,

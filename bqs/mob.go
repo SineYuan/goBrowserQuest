@@ -6,7 +6,7 @@ import (
 
 type Mob struct {
 	Character
-	OriginX, OriginY int
+	OriginX, OriginY        int
 	ArmorLevel, WeaponLevel int
 	Haters                  map[int]int
 	IsDead                  bool
@@ -174,9 +174,9 @@ func NewMob(mobCount int, kind EntityType, x, y int) *Mob {
 		mob.HP = prop.HP
 		mob.ArmorLevel, mob.WeaponLevel = prop.Armor, prop.Weapon
 		mob.ReswapnTimer = time.NewTimer(0)
-		<- mob.ReswapnTimer.C
+		<-mob.ReswapnTimer.C
 		mob.HateTimer = time.NewTimer(0)
-		<- mob.HateTimer.C
+		<-mob.HateTimer.C
 		mob.startTimerService()
 		return mob
 	}
@@ -239,10 +239,10 @@ func (mob *Mob) ChaseTarget(zoneId string, mp *Map, targetX, targetY int) {
 	} else {
 		pointsAround := make([][2]int, 0)
 		for _, p := range [][2]int{
-			[2]int{targetX, targetY+1},
-			[2]int{targetX+1, targetY},
-			[2]int{targetX, targetY-1},
-			[2]int{targetX-1, targetY},
+			[2]int{targetX, targetY + 1},
+			[2]int{targetX + 1, targetY},
+			[2]int{targetX, targetY - 1},
+			[2]int{targetX - 1, targetY},
 		} {
 			if mp.IsValidPosition(p[0], p[1]) && zoneId == mp.GetGroupIdFromPosition(p[0], p[1]) {
 				pointsAround = append(pointsAround, p)
@@ -273,7 +273,7 @@ func (m *Mob) DropItem() *Item {
 			acc += v
 		}
 		if kind := GetEntityTypeByString(itemType); kind.Id != 0 {
-			item := NewItem(11000000 + m.OriginX * 1000 + m.OriginY , kind, m.X, m.Y)
+			item := NewItem(11000000 + m.OriginX * 1000 + m.OriginY, kind, m.X, m.Y)
 			return item
 		}
 	}

@@ -3,11 +3,12 @@ package bqs
 import (
 	"log"
 	"math/rand"
-	"github.com/kataras/iris/websocket"
 	"time"
 	"strings"
-	"github.com/bitly/go-simplejson"
 	"strconv"
+
+	"github.com/bitly/go-simplejson"
+	"github.com/kataras/iris/websocket"
 )
 
 func init() {
@@ -16,24 +17,23 @@ func init() {
 
 const DEFAULT_CONNECT_TIME = 60 * 5
 
-
 type Player struct {
 	Character
-	Armor, Weapon int
+	Armor, Weapon           int
 	ArmorLevel, WeaponLevel int
-	Name           string
-	previousZoneId string
-	zoneId         string
-	Orientation    int
-	hasEnteredGame bool
-	conn           *websocket.Conn
-	EventCh        chan *Event
-	PacketChan     chan *Packet
-	exit           chan bool
-	world          *World
-	timer          *time.Timer
+	Name                    string
+	previousZoneId          string
+	zoneId                  string
+	Orientation             int
+	hasEnteredGame          bool
+	conn                    *websocket.Conn
+	EventCh                 chan *Event
+	PacketChan              chan *Packet
+	exit                    chan bool
+	world                   *World
+	timer                   *time.Timer
 
-	logger         *log.Logger
+	logger                  *log.Logger
 }
 
 func NewPlayer(conn *websocket.Conn, world *World) *Player {
@@ -181,7 +181,6 @@ func (p *Player) onHello(name string, armorId, weaponId int) {
 	p.EventCh = world.GetZoneChannelFromPosition(p.X, p.Y)
 	p.zoneId = p.world.GetZoneIdFromPosition(p.X, p.Y)
 
-
 	e := AquireEvent(EVENT_HELLO, p)
 	e.PlayerID = p.Id
 
@@ -266,11 +265,11 @@ func (p *Player) updateOrientationAfterZone() {
 	if zx1 > zx2 {
 		p.Orientation = ORIENTATION_LEFT
 	} else if zx1 < zx2 {
-		p.Orientation =  ORIENTATION_RIGTH
+		p.Orientation = ORIENTATION_RIGTH
 	} else if zy1 > zy2 {
-		p.Orientation =  ORIENTATION_UP
+		p.Orientation = ORIENTATION_UP
 	} else {
-		p.Orientation =  ORIENTATION_DOWN
+		p.Orientation = ORIENTATION_DOWN
 	}
 }
 
@@ -353,7 +352,7 @@ func (p *Player) onDisconnect() {
 	e.PlayerID = p.Id
 	p.EventCh <- e
 
-	<- responseCh
+	<-responseCh
 
 	p.world.RemovePlayer()
 }

@@ -39,8 +39,6 @@ type CheckPoint struct {
 	S    int
 }
 
-
-
 type Chest struct {
 	X, Y  int
 	Items []int `json:"i"`
@@ -128,7 +126,6 @@ func (m *Map) initCheckPoints() {
 func (m *Map) IsOutOfBounds(x, y int) bool {
 	return x <= 0 || x >= m.Width || y <= 0 || y >= m.Height;
 }
-
 
 func (m *Map) IsColliding(x, y int) bool {
 	return m.Grid[y][x]

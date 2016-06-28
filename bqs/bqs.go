@@ -7,11 +7,11 @@ import (
 )
 
 type BQS struct {
-	World *World
-	PlayerMap map[string]*Player
-	ZoneMap map[string]*Zone
+	World       *World
+	PlayerMap   map[string]*Player
+	ZoneMap     map[string]*Zone
 	PlayerCount int
-	Logger *log.Logger
+	Logger      *log.Logger
 }
 
 type Packet struct {
@@ -45,7 +45,7 @@ func (b *BQS) HandleConnection(c *websocket.Conn) {
 	go player.HandleLoop()
 	for {
 		select {
-		case <- player.exit:
+		case <-player.exit:
 			return
 		case player.PacketChan <- recvPacket(c):
 		}

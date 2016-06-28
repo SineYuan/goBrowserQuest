@@ -372,7 +372,6 @@ func (z *Zone) clearPlayer(pid int) {
 	}
 }
 
-
 func (z *Zone) onLogout(e *Event) {
 	despawnEvent := AquireEvent(EVENT_DESPAWN, e.PlayerID)
 	z.broadcastZone(despawnEvent)

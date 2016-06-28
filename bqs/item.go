@@ -7,8 +7,8 @@ import (
 
 type Item struct {
 	Entity
-	IsStatic bool
-	Blink bool
+	IsStatic  bool
+	Blink     bool
 	IsDestroy bool
 }
 
@@ -43,7 +43,7 @@ func NewItem(id int, kind EntityType, x, y int) *Item {
 func NewDropItem(kind EntityType, x, y int) *Item {
 	fmt.Println("drop item", kind)
 	item := new(Item)
-	item.Id = <- itemIDCh
+	item.Id = <-itemIDCh
 	item.X, item.Y = x, y
 	item.Kind = kind
 	fmt.Println("return drop item", kind)
@@ -75,7 +75,7 @@ func (i *Item) ReswapnLater(eventCh chan *Event) {
 	// TODO optimizate with priorityqueue
 	go func() {
 		timer := time.NewTimer(DEFAULT_ITEM_RESWAPN_TIME)
-		<- timer.C
+		<-timer.C
 		e := AquireEvent(EVENT_ITEM_RESWAPN, i.Id)
 		select {
 		case eventCh <- e:
@@ -87,7 +87,7 @@ func (i *Item) DeswapnLater(eventCh chan *Event) {
 	// TODO optimizate with priorityqueue
 	go func() {
 		timer := time.NewTimer(DEFAULT_DROP_ITEM_TIME)
-		<- timer.C
+		<-timer.C
 		e := AquireEvent(EVENT_ITEM_DESWAPN, i.Id)
 		select {
 		case eventCh <- e:

@@ -1,11 +1,10 @@
 package bqs
 
-
 type MobArea struct {
-	Id int
-	X, Y int
+	Id            int
+	X, Y          int
 	Width, Height int
-	Type string
-	NB int
-	Entities []*Entity
+	Type          string
+	NB            int
+	Entities      []*Entity
 }

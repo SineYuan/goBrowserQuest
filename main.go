@@ -22,7 +22,6 @@ func main() {
 	log.Println(config)
 	bqs := gs.NewBQS(config)
 
-
 	if *clientDir != "" {
 		iris.Static(*clientReqPrefix, *clientDir, 1)
 	}

@@ -1,7 +1,7 @@
 package bqs
 
 type Entity struct {
-	Id         int
+	Id   int
 	X, Y int
 	Kind EntityType
 }
@@ -18,5 +18,5 @@ type EntityInterface interface {
 }
 
 func (e *Entity) GetState() []interface{} {
-	return []interface{} {e.Id, e.Kind.Id, e.X, e.Y}
+	return []interface{}{e.Id, e.Kind.Id, e.X, e.Y}
 }

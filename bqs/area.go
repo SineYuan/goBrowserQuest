@@ -1,12 +1,11 @@
 package bqs
 
 type Area struct {
-	Id int
-	X, Y int
+	Id            int
+	X, Y          int
 	Width, Height int
-	Entities []*Entity
+	Entities      []*Entity
 }
-
 
 type ChestArea struct {
 	Id     int

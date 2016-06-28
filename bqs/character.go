@@ -3,9 +3,9 @@ package bqs
 type Character struct {
 	Entity
 	Orientation int
-	MaxHP int
-	HP int
-	TargetId int
+	MaxHP       int
+	HP          int
+	TargetId    int
 }
 
 func (c *Character) ResetMaxHP(maxHitPoints int) {

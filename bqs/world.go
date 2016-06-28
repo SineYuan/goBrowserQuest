@@ -81,7 +81,6 @@ func (w *World) spawnStaticEntities() {
 	}
 }
 
-
 func (w *World) addNPC(npc *NPC) {
 	zch := w.GetZoneChannelFromPosition(npc.X, npc.Y)
 	e := AquireEvent(EVENT_ADD_ENTITY, "npc", npc)
@@ -107,16 +106,15 @@ func (w *World) addItem(item *Item) {
 	w.itemCount++
 }
 
-
 func (w *World) startBroadcastService() {
 	w.BroadcastCh = make(chan *Event, 500)
 	go func() {
 		for {
 			select {
-			case <- w.stopCh:
+			case <-w.stopCh:
 				close(w.zonesStopCh)
 				return
-			case event := <- w.BroadcastCh:
+			case event := <-w.BroadcastCh:
 				w.Logger.Println("recive boardcast event:", event)
 				switch event.Type {
 				case EVENT_POPULATION:
@@ -158,7 +156,6 @@ func (w *World) RemovePlayer() {
 	}()
 }
 
-
 func (w *World) IsValidPosition(x, y int) bool {
 	return w.Map.IsValidPosition(x, y)
 }
@@ -174,8 +171,7 @@ func (w *World) GetZoneIdFromPosition(x, y int) string {
 	return zid
 }
 
-
-func (w *World) GetStartPosition(p *Player) (int, int){
+func (w *World) GetStartPosition(p *Player) (int, int) {
 	return w.Map.GetRandomStartingPosition()
 }
 

@@ -5,18 +5,16 @@ import (
 	"math/rand"
 )
 
-
-
 func DmgFormula(weaponLevel, armorLevel int) int {
-		dealt := weaponLevel * random(5, 10)
-		absorbed := armorLevel * random(1, 3)
-		dmg := dealt - absorbed
+	dealt := weaponLevel * random(5, 10)
+	absorbed := armorLevel * random(1, 3)
+	dmg := dealt - absorbed
 
-		if dmg <= 0 {
-			return random(0, 3)
-		} else {
-			return dmg
-		}
+	if dmg <= 0 {
+		return random(0, 3)
+	} else {
+		return dmg
+	}
 }
 
 func HpFormula(armorLevel int) int {
