@@ -3,7 +3,7 @@ package bqs
 import (
 	"log"
 	"github.com/kataras/iris"
-	"github.com/kataras/iris/websocket"
+	"github.com/iris-contrib/websocket"
 )
 
 type BQS struct {

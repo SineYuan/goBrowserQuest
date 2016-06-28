@@ -8,7 +8,7 @@ import (
 	"strconv"
 
 	"github.com/bitly/go-simplejson"
-	"github.com/kataras/iris/websocket"
+	"github.com/iris-contrib/websocket"
 )
 
 func init() {
