@@ -10,7 +10,7 @@ import (
 )
 
 var confFilePath = flag.String("config", "./config.json", "configuration file path")
-var clientDir = flag.String("client", "", "BrowserQuest root to serve if provided")
+var clientDir = flag.String("client", "", "BrowserQuest root directory to serve if provided")
 var clientReqPrefix = flag.String("prefix", "/game", "request url prefix when client is provided, cannot be '/' ")
 
 func main() {
