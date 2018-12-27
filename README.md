@@ -26,6 +26,16 @@ Configuration
 Deployment
 ----------
 
+### client 
+```
+git clone https://github.com/mozilla/BrowserQuest.git
+
+cp BrowserQuest/client/config/config_local.json-dist BrowserQuest/client/config/config_local.json 
+```
+edit `BrowserQuest/client/config/config_local.json` to set server host and port.
+
+### server
+
 ```
 cd $GOPATH/src/github.com/SineYuan/goBrowserQuest
 go build main.go
@@ -33,6 +43,7 @@ go build main.go
 ```
 
 then you can play game at `http://{HOST}:{PORT}/game/client/index.html`
+
 
 TODO
 ----------
