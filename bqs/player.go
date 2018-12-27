@@ -8,7 +8,8 @@ import (
 	"strconv"
 
 	"github.com/bitly/go-simplejson"
-	"github.com/iris-contrib/websocket"
+
+	"github.com/gorilla/websocket"
 )
 
 func init() {
@@ -33,16 +34,16 @@ type Player struct {
 	world                   *World
 	timer                   *time.Timer
 
-	logger                  *log.Logger
+	logger *log.Logger
 }
 
 func NewPlayer(conn *websocket.Conn, world *World) *Player {
 	p := &Player{
-		conn: conn,
-		world: world,
+		conn:       conn,
+		world:      world,
 		PacketChan: make(chan *Packet, 100),
-		exit: make(chan bool),
-		timer: time.NewTimer(time.Second * DEFAULT_CONNECT_TIME),
+		exit:       make(chan bool),
+		timer:      time.NewTimer(time.Second * DEFAULT_CONNECT_TIME),
 	}
 	p.Kind = TYPE_WARRIOR
 	p.Id = <-world.IdCh
@@ -332,7 +333,7 @@ func (p *Player) sendBatch(events []*Event) error {
 		}
 	}
 	if len(bytes) > 1 {
-		bytes[len(bytes) - 1] = ']'
+		bytes[len(bytes)-1] = ']'
 
 		log.Printf("send to %v: %v\n", p.Id, string(bytes))
 		err := p.conn.WriteMessage(websocket.TextMessage, bytes)

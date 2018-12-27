@@ -2,8 +2,9 @@ package bqs
 
 import (
 	"log"
-	"github.com/kataras/iris"
-	"github.com/iris-contrib/websocket"
+
+	"github.com/labstack/echo"
+	"github.com/gorilla/websocket"
 )
 
 type BQS struct {
@@ -28,7 +29,7 @@ func recvPacket(c *websocket.Conn) *Packet {
 
 func NewBQS(cfg *Config) *BQS {
 	bqs := &BQS{
-		World: NewWrold(cfg),
+		World:     NewWrold(cfg),
 		PlayerMap: make(map[string]*Player),
 	}
 	return bqs
@@ -58,10 +59,20 @@ func (b *BQS) boardcast(e *Event) {
 	}
 }
 
-func (b *BQS) ToIrisHandler() iris.HandlerFunc {
-	return func(ctx *iris.Context) {
-		var connService = websocket.New(b.HandleConnection) // use default options
-		connService.Upgrade(ctx)
+var (
+	upgrader = websocket.Upgrader{}
+)
+
+func (b *BQS) ToEchoHandler() echo.HandlerFunc {
+	return func(ctx echo.Context) error {
+		ws, err := upgrader.Upgrade(ctx.Response(), ctx.Request(), nil)
+		if err != nil {
+			return err
+		}
+		defer ws.Close()
+		b.HandleConnection(ws)
+
+		return nil
 	}
 }
 

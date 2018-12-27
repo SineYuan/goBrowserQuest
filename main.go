@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"flag"
 	"log"
-	"github.com/kataras/iris"
+
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 
 	gs "github.com/SineYuan/goBrowserQuest/bqs"
 )
@@ -22,12 +24,15 @@ func main() {
 	log.Println(config)
 	bqs := gs.NewBQS(config)
 
+	e := echo.New()
+	e.Use(middleware.Recover())
+
 	if *clientDir != "" {
-		iris.Static(*clientReqPrefix, *clientDir, 1)
+		e.Static(*clientReqPrefix, *clientDir)
 	}
-	iris.Any("/", bqs.ToIrisHandler())
+	e.Any("/", bqs.ToEchoHandler())
 
 	addr := fmt.Sprintf("%v:%v", config.Host, config.Port)
 	log.Println("Server is running at " + addr)
-	iris.Listen(addr)
+	e.Logger.Fatal(e.Start(addr))
 }
